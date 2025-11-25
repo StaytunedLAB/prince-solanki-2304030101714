@@ -1,4 +1,3 @@
-#hello
 # 🚀 StaytunedLABS Internship Repository: Welcome!
 
 We are excited to welcome you to StaytunedLABS! This repository is your home base for the internship, containing all the code and documentation you need.
