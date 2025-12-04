@@ -56,4 +56,4 @@ let user8 = null;
 alert(user1?.[key]); // John
 alert(user2?.[key]); // undefined
 
-delete user6?.name; // delete user.name if user exists
+delete user6?.name; // delete user.name if user exists 
