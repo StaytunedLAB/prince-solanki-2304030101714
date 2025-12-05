@@ -31,3 +31,10 @@ let arrr = fruit;
 alert(arrr === fruit); // true
 arrr.push("mango");
 alert(fruit);
+
+
+// One of the oldest ways to cycle array items is the for loop over indexes:
+let demo = ["apple", "queen", "king"];
+for (let i = 0; i < demo.length; i++) {
+    alert(demo[i]);
+}
