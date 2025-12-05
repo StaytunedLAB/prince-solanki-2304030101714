@@ -18,7 +18,7 @@ console.log(num.toString());    // "3.14159"
 
 // 3. Boolean primitive conversion
 let c = false;
-console.log(String(b));         // "false"
+console.log(String(c));         // "false"
 console.log(Boolean(""));       // false (empty string is falsy)
 
 // 4. Converting types using wrapper constructors (as functions, not with new)
