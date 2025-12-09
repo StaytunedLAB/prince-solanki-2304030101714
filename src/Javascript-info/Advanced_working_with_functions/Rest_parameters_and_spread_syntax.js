@@ -12,7 +12,7 @@ console.log(sum(10, 20));   // 30
 
 // The “arguments” variable
 function showName() {
-  alert( arguments.length );
+  alert( arguments.length ); 
   alert( arguments[0] );
   alert( arguments[1] );
 
@@ -63,4 +63,3 @@ clone.age = 25;
 
 console.log(obj);    // {name: "John", age: 20}
 console.log(clone);  // {name: "John", age: 25}
-
