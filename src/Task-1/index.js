@@ -244,9 +244,9 @@ function processBankingTransaction(input) {
 // Test Case 1: Valid transactions
 const testCase1 = {
   accountNumber: 'ACC001',
-  accountHolder: 'John Doe',
-  initialBalance: 1000,
-  currency: 'USD',
+  accountHolder: 'Prince Solanki',
+  initialBalance: 500000,
+  currency: 'INR',
   transactions: [
     { type: 'Deposit', amount: 500 },
     { type: 'Withdraw', amount: 200 },
@@ -257,7 +257,7 @@ const testCase1 = {
 // Test Case 2: Invalid transactions
 const testCase2 = {
   accountNumber: 'ACC002',
-  accountHolder: 'Jane Smith',
+  accountHolder: 'Neel Sharma',
   initialBalance: '2000',
   currency: 'EUR',
   transactions: [
@@ -274,7 +274,7 @@ const testCase2 = {
 // Test Case 3: Edge cases
 const testCase3 = {
   accountNumber: 'ACC003',
-  accountHolder: 'Bob Johnson',
+  accountHolder: 'Meet Patel',
   initialBalance: '500.50',
   currency: 'GBP',
   transactions: [
