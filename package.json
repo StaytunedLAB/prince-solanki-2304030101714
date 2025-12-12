@@ -4,7 +4,7 @@
     "description": "Internship repository for StaytunedLABS projects.",
     "main": "src/hello-intern.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "node --test src/**/*.test.js",
         "start": "node src/hello-intern.js"
     },
     "keywords": [

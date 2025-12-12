@@ -8,6 +8,9 @@
  * @returns {number|null} - Valid number or null if invalid
  */
 function parseAmount(value) {
+  if (value === null || value === undefined || (typeof value === 'string' && value.trim() === '')) {
+    return null;
+  }
   try {
     const num = Number(value);
     if (isNaN(num) || !isFinite(num)) {
@@ -113,6 +116,7 @@ function processTransaction(account, index, transaction) {
 /**
  * Main banking system processor
  * @param {object} input - Input data with account and transactions
+ * @returns {object} - Result object containing account state and transaction logs
  */
 function processBankingTransaction(input) {
   let processingLog = '';
@@ -235,60 +239,76 @@ function processBankingTransaction(input) {
     console.log(`  ${processingLog}`);
     console.log('\n========================================\n');
   }
+
+  return {
+    account,
+    appliedTransactions,
+    rejectedTransactions,
+    processingLog
+  };
 }
 
+module.exports = {
+  parseAmount,
+  isValidTransactionType,
+  validateTransaction,
+  processTransaction,
+  processBankingTransaction
+};
+
 // ===========================
-// TEST CASES
+// TEST CASES (Run only if executed directly)
 // ===========================
+if (require.main === module) {
+  // Test Case 1: Valid transactions
+  const testCase1 = {
+    accountNumber: 'ACC001',
+    accountHolder: 'Prince Solanki',
+    initialBalance: 500000,
+    currency: 'INR',
+    transactions: [
+      { type: 'Deposit', amount: 500 },
+      { type: 'Withdraw', amount: 200 },
+      { type: 'Deposit', amount: 300 }
+    ]
+  };
 
-// Test Case 1: Valid transactions
-const testCase1 = {
-  accountNumber: 'ACC001',
-  accountHolder: 'Prince Solanki',
-  initialBalance: 500000,
-  currency: 'INR',
-  transactions: [
-    { type: 'Deposit', amount: 500 },
-    { type: 'Withdraw', amount: 200 },
-    { type: 'Deposit', amount: 300 }
-  ]
-};
+  // Test Case 2: Invalid transactions
+  const testCase2 = {
+    accountNumber: 'ACC002',
+    accountHolder: 'Neel Sharma',
+    initialBalance: '2000',
+    currency: 'EUR',
+    transactions: [
+      { type: 'Deposit', amount: 500 },
+      { type: 'Withdraw', amount: 3000 }, // Insufficient balance
+      { type: 'Deposit', amount: -100 }, // Negative amount
+      { type: 'Unknown', amount: 50 }, // Unknown type
+      { type: 'Withdraw' }, // Missing amount
+      { amount: 200 }, // Missing type
+      { type: 'Deposit', amount: 'invalid' } // Invalid amount
+    ]
+  };
 
-// Test Case 2: Invalid transactions
-const testCase2 = {
-  accountNumber: 'ACC002',
-  accountHolder: 'Neel Sharma',
-  initialBalance: '2000',
-  currency: 'EUR',
-  transactions: [
-    { type: 'Deposit', amount: 500 },
-    { type: 'Withdraw', amount: 3000 }, // Insufficient balance
-    { type: 'Deposit', amount: -100 }, // Negative amount
-    { type: 'Unknown', amount: 50 }, // Unknown type
-    { type: 'Withdraw' }, // Missing amount
-    { amount: 200 }, // Missing type
-    { type: 'Deposit', amount: 'invalid' } // Invalid amount
-  ]
-};
+  // Test Case 3: Edge cases
+  const testCase3 = {
+    accountNumber: 'ACC003',
+    accountHolder: 'Meet Patel',
+    initialBalance: '500.50',
+    currency: 'GBP',
+    transactions: [
+      { type: 'Deposit', amount: '250.75' },
+      { type: 'Withdraw', amount: 0 }, // Zero amount
+      { type: 'Withdraw', amount: 750.25 } // Exact balance
+    ]
+  };
 
-// Test Case 3: Edge cases
-const testCase3 = {
-  accountNumber: 'ACC003',
-  accountHolder: 'Meet Patel',
-  initialBalance: '500.50',
-  currency: 'GBP',
-  transactions: [
-    { type: 'Deposit', amount: '250.75' },
-    { type: 'Withdraw', amount: 0 }, // Zero amount
-    { type: 'Withdraw', amount: 750.25 } // Exact balance
-  ]
-};
+  console.log('\n==================== TEST CASE 1 ====================');
+  processBankingTransaction(testCase1);
 
-console.log('\n==================== TEST CASE 1 ====================');
-processBankingTransaction(testCase1);
+  console.log('\n==================== TEST CASE 2 ====================');
+  processBankingTransaction(testCase2);
 
-console.log('\n==================== TEST CASE 2 ====================');
-processBankingTransaction(testCase2);
-
-console.log('\n==================== TEST CASE 3 ====================');
-processBankingTransaction(testCase3);
+  console.log('\n==================== TEST CASE 3 ====================');
+  processBankingTransaction(testCase3);
+}
