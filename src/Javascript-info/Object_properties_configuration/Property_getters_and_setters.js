@@ -24,7 +24,7 @@ console.log(user.lastName);  // Mehta
 
 // Accessor Descriptors
 
-let user = {
+let user1 = {
   get name() {
     return "Prince";
   }
@@ -39,9 +39,9 @@ console.log(Object.getOwnPropertyDescriptor(user, "name"));
 }*/
 
 // Defining accessor using Object.defineProperty
-let user = {};
+let user2 = {};
 
-Object.defineProperty(user, "age", {
+Object.defineProperty(user2, "age", {
   get() {
     return this._age;
   },
@@ -54,10 +54,8 @@ Object.defineProperty(user, "age", {
   }
 });
 
-user.age = 20;
-console.log(user.age); // 20
+user2.age = 20;
+console.log(user2.age); // 20
 
-user.age = -5;         // Age must be positive
-
-
+user2.age = -5;         // Age must be positive
 
